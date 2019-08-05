@@ -4,7 +4,7 @@ import ntpath
 
 indir = '/home/kvv/Python/Data/natural_movies_gaze'
 outdir = '/home/kvv/Python/Data/natural_movies_gaze_jsons/'
-Ts, X, Y, s = 0.0, 0.0, 0.0, 0.0
+Ts, X, Y, trash_info = 0.0, 0.0, 0.0, 0.0
 
 for root, dirs, filenames in os.walk(indir):
     for f in filenames:
@@ -14,8 +14,9 @@ for root, dirs, filenames in os.walk(indir):
         for lines in importfile:
             temp += 1
             if temp > 2:
-                Ts, X, Y, s = lines.split()
-                export_data.append({"X": float(X), "Y": float(Y), "Ts": float(Ts) / 1000.0}) 
+                Ts, X, Y, trash_info = lines.split()
+                if trash_info != 0:
+                    export_data.append({"X": float(X), "Y": float(Y), "Ts": float(Ts) / 1000.0}) 
         importfile.close()  
 
         print("sdfsd" , f)
