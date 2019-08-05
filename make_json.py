@@ -6,7 +6,7 @@ def making_JSON():
     outdir = '/home/kvv/Python/Data/natural_movies_gaze_jsons/'
     Ts = X = Y = 0.0
 
-    for root, dirs, filenames in os.walk(indir):
+    for root, _, filenames in os.walk(indir):
         for f in filenames:
             temp = 0
             export_data = []
@@ -24,7 +24,31 @@ def making_JSON():
             importfile.close() 
             exportfile.close()
 
-    print('JSON creation complete!')
+            print(f, 'JSON maked')
+
+    print('\n\n\nJSON creation complete!\n\n')
+
+
+def making_dirs():
+    indir = '/home/kvv/Python/Data/movies_mpg'
+    outdir = '/home/kvv/Python/Data/output_data/'
+
+    for _, _, filenames in os.walk(indir):
+        for f in filenames:
+            video_name = f.split(".")[0]
+            os.system("ffmpeg -i " + indir + "/" + video_name + ".mpg " + indir + "/" + video_name + ".mp4")
+            os.system("rm " + indir + "/" + video_name + ".mpg")
+
+            print('\n\n\n' + video_name, 'converted\n\n')
+
+            os.system("mkdir " + outdir + video_name)
+
+            # mv video to new dir
+            # mv JSONs to new dir using mask
+
+    print('\n\n\nDirs creation complete!\n\n')
+
 
 if __name__ ==  "__main__":
     making_JSON()
+    making_dirs()
