@@ -1,6 +1,6 @@
 import json
 import os
-
+import ntpath
 
 indir = '/home/kvv/Python/Data/natural_movies_gaze'
 outdir = '/home/kvv/Python/Data/natural_movies_gaze_jsons'
@@ -19,8 +19,7 @@ for root, dirs, filenames in os.walk(indir):
         importfile.close()  
 
         print("sdfsd" , f)
-        exportfile = open("/home/kvv/Python/Data/natural_movies_gaze_jsons/test.json", "w")
+        exportfile = open("/home/kvv/Python/Data/natural_movies_gaze_jsons/" + ntpath.basename(f) + ".json", "w")
         
         exportfile.write(json.dumps(export_data))
         exportfile.close()
-        break
